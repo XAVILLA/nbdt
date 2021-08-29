@@ -21,7 +21,7 @@ import torch
 from torch.nn import functional as F
 from torch.utils import data
 
-__all__ = names = ('Office_Home')
+__all__ = names = ('Office_Home',)
 
 splits = ['Art', 'Clipart', 'Product', 'Real']
 
