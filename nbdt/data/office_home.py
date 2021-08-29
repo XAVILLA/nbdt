@@ -51,7 +51,7 @@ class Office_Home(data.Dataset):
         # print(self.imgs)
         def is_valid(path):
             # print(path)
-            result = [path in im for im.replace('zangwei/datasets', 'data') in self.imgs]
+            result = [path in im.replace('zangwei/datasets', 'data') for im in self.imgs]
             return any(result)
 
         self.dataset = datasets.ImageFolder('/rscratch/xyyue/data/officehome/' + split,
