@@ -78,6 +78,7 @@ class Office_Home(data.Dataset):
     def transform_val():
         return transforms.Compose(
             [
+                transforms.Scale((64, 64)),
                 transforms.ToTensor(),
                 transforms.Normalize(
                     [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
