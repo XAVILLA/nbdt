@@ -24,6 +24,7 @@ datasets = (
     + data.pascal_context.names
     + data.lip.names
     + data.ade20k.names
+    + data.office_home.names
 )
 
 
