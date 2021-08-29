@@ -45,17 +45,17 @@ if args.classes:
     classes = args.classes
 else:
     dataset = getattr(data, args.dataset)
-    dataset_kwargs = generate_kwargs(
-        args,
-        dataset,
-        name=f"Dataset {args.dataset}",
-        keys=data.custom.keys,
-        globals=globals(),
-    )
-    if args.dataset not in ["Cityscapes", "PascalContext", "LookIntoPerson", "ADE20K"]:
-        dataset_kwargs["download"] = True
-
-    dataset = dataset(**dataset_kwargs, root="./data")
+    # dataset_kwargs = generate_kwargs(
+    #     args,
+    #     dataset,
+    #     name=f"Dataset {args.dataset}",
+    #     keys=data.custom.keys,
+    #     globals=globals(),
+    # )
+    # if args.dataset not in ["Cityscapes", "PascalContext", "LookIntoPerson", "ADE20K"]:
+    #     dataset_kwargs["download"] = True
+    #
+    # dataset = dataset(**dataset_kwargs, root="./data")
 
     classes = dataset.classes
     if args.dataset == "Cityscapes":
