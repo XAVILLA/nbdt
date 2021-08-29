@@ -95,4 +95,4 @@ class Office_Home(data.Dataset):
         return len(self.dataset)
 
     def __getitem__(self, idx):
-        return len(self.dataset)
+        return self.dataset[idx]
