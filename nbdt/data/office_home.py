@@ -28,7 +28,7 @@ splits = ['Art', 'Clipart', 'Product', 'Real']
 
 class Office_Home(data.Dataset):
 
-    def __init__(self, split='Art', train=True):
+    def __init__(self, split='Art', train=True, transform=None):
         assert split in splits
         data_root = '/rscratch/xyyue/data/officehome/'
         norm_file = split + '-info.json'
@@ -53,7 +53,8 @@ class Office_Home(data.Dataset):
             return any([path in im for im in self.imgs])
 
         self.dataset = datasets.ImageFolder('/rscratch/xyyue/data/officehome/' + split,
-                                            is_valid_file = is_valid)
+                                            transform=transform,
+                                            is_valid_file=is_valid)
 
         self.classes = self.dataset.classes
         self.class_to_idx = {cls: i for i, cls in enumerate(self.classes)}
@@ -66,7 +67,7 @@ class Office_Home(data.Dataset):
                 transforms.RandomHorizontalFlip(),
                 transforms.ToTensor(),
                 transforms.Normalize(
-                    self.mean, self.std
+                    [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
                 ),
             ]
         )
@@ -77,7 +78,7 @@ class Office_Home(data.Dataset):
             [
                 transforms.ToTensor(),
                 transforms.Normalize(
-                    self.mean, self.std
+                    [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
                 ),
             ]
         )
@@ -85,14 +86,11 @@ class Office_Home(data.Dataset):
     @staticmethod
     def transform_val_inverse():
         return transforms_custom.InverseNormalize(
-            self.mean, self.std
+            [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
         )
-
 
     def __len__(self):
         return len(self.dataset)
 
     def __getitem__(self, idx):
         return len(self.dataset)
-
-
