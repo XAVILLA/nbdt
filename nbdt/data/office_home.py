@@ -55,8 +55,8 @@ class Office_Home(data.Dataset):
         self.dataset = datasets.ImageFolder('/rscratch/xyyue/data/officehome/' + split,
                                             is_valid_file = is_valid)
 
-    @staticmethod
-    def transform_train():
+    # @staticmethod
+    def transform_train(self):
         return transforms.Compose(
             [
                 transforms.RandomResizedCrop(64),
@@ -68,8 +68,8 @@ class Office_Home(data.Dataset):
             ]
         )
 
-    @staticmethod
-    def transform_val():
+    # @staticmethod
+    def transform_val(self):
         return transforms.Compose(
             [
                 transforms.ToTensor(),
@@ -79,8 +79,8 @@ class Office_Home(data.Dataset):
             ]
         )
 
-    @staticmethod
-    def transform_val_inverse():
+    # @staticmethod
+    def transform_val_inverse(self):
         return transforms_custom.InverseNormalize(
             self.mean, self.std
         )
