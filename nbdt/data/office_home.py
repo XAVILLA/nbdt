@@ -28,7 +28,7 @@ splits = ['Art', 'Clipart', 'Product', 'Real']
 
 class Office_Home(data.Dataset):
 
-    def __init__(self, split='Art', train=True, transform):
+    def __init__(self, split='Art', train=True):
         assert split in splits
         data_root = '/rscratch/xyyue/data/officehome/'
         norm_file = split + '-info.json'
