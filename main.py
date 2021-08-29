@@ -98,35 +98,43 @@ def main():
     dataset_train = getattr(data, args.dataset)
     dataset_test = getattr(data, args.dataset_test or args.dataset)
 
-    transform_train = dataset_train.transform_train()
-    transform_test = dataset_test.transform_val()
 
-    dataset_train_kwargs = generate_kwargs(
-        args,
-        dataset_train,
-        name=f"Dataset {dataset_train.__class__.__name__}",
-        globals=locals(),
-    )
-    dataset_test_kwargs = generate_kwargs(
-        args,
-        dataset_test,
-        name=f"Dataset {dataset_test.__class__.__name__}",
-        globals=locals(),
-    )
-    trainset = dataset_train(
-        **dataset_train_kwargs,
-        root="./data",
-        train=True,
-        download=True,
-        transform=transform_train,
-    )
-    testset = dataset_test(
-        **dataset_test_kwargs,
-        root="./data",
-        train=False,
-        download=True,
-        transform=transform_test,
-    )
+    if not args.dataset == 'Office_Home':
+
+        transform_train = dataset_train.transform_train()
+        transform_test = dataset_test.transform_val()
+
+        dataset_train_kwargs = generate_kwargs(
+            args,
+            dataset_train,
+            name=f"Dataset {dataset_train.__class__.__name__}",
+            globals=locals(),
+        )
+        print(dataset_train_kwargs)
+        dataset_test_kwargs = generate_kwargs(
+            args,
+            dataset_test,
+            name=f"Dataset {dataset_test.__class__.__name__}",
+            globals=locals(),
+        )
+        trainset = dataset_train(
+            **dataset_train_kwargs,
+            root="./data",
+            train=True,
+            download=True,
+            transform=transform_train,
+        )
+        testset = dataset_test(
+            **dataset_test_kwargs,
+            root="./data",
+            train=False,
+            download=True,
+            transform=transform_test,
+        )
+
+    else:
+        pass
+
 
     assert trainset.classes == testset.classes or args.disable_test_eval, (
         trainset.classes,

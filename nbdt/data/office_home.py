@@ -28,7 +28,7 @@ splits = ['Art', 'Clipart', 'Product', 'Real']
 
 class Office_Home(data.Dataset):
 
-    def __init__(self, split='Art', train=True):
+    def __init__(self, split='Art', train=True, transform):
         assert split in splits
         data_root = '/rscratch/xyyue/data/officehome/'
         norm_file = split + '-info.json'
@@ -55,8 +55,11 @@ class Office_Home(data.Dataset):
         self.dataset = datasets.ImageFolder('/rscratch/xyyue/data/officehome/' + split,
                                             is_valid_file = is_valid)
 
+        self.classes = self.dataset.classes
+        self.class_to_idx = {cls: i for i, cls in enumerate(self.classes)}
 
-    def transform_train(self):
+    @staticmethod
+    def transform_train():
         return transforms.Compose(
             [
                 transforms.RandomResizedCrop(64),
@@ -68,8 +71,8 @@ class Office_Home(data.Dataset):
             ]
         )
 
-
-    def transform_val(self):
+    @staticmethod
+    def transform_val():
         return transforms.Compose(
             [
                 transforms.ToTensor(),
@@ -79,8 +82,8 @@ class Office_Home(data.Dataset):
             ]
         )
 
-
-    def transform_val_inverse(self):
+    @staticmethod
+    def transform_val_inverse():
         return transforms_custom.InverseNormalize(
             self.mean, self.std
         )
