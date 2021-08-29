@@ -66,7 +66,7 @@ def synset_to_name(synset):
 
 
 def write_wnids(wnids, path):
-    makeparentdirs(path)
+    # makeparentdirs(path)
     with open(str(path), "w") as f:
         f.write("\n".join(wnids))
 
