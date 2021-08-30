@@ -13,7 +13,7 @@ weight=1
 
 # 2. train with soft tree supervision loss -- for models without a pretrained checkpoint, use `path-resume` OR just train from scratch, without `path-resume`
 # python main.py --lr=0.01 --dataset=${dataset} --model=${model} --hierarchy=induced-${model} --path-resume=./checkpoint/ckpt-${dataset}-${model}.pth --loss=SoftTreeSupLoss --tree-supervision-weight=${weight}  # fine-tuning
-python main.py --dataset=${dataset} --arch=${model} --hierarchy=induced-${model} --loss=SoftTreeSupLoss --tree-supervision-weight=${weight}  --batch-size=32 # training from scratch
+python main.py --dataset=${dataset} --arch=${model} --hierarchy=induced-${model} --loss=SoftTreeSupLoss --tree-supervision-weight=${weight}  --batch-size=64 # training from scratch
 
 # 3. evaluate with soft then hard inference
 for analysis in SoftEmbeddedDecisionRules HardEmbeddedDecisionRules; do
