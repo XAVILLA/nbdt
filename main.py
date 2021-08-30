@@ -190,7 +190,7 @@ def main():
                 Colors.cyan(f"==> Checkpoint found at {resume_path}")
 
     # hierarchy
-    # tree = Tree.create_from_args(args, classes=trainset.classes)
+    tree = Tree.create_from_args(args, classes=trainset.classes)
 
     # loss
     criterion = None
