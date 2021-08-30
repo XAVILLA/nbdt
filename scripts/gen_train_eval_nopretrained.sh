@@ -1,8 +1,8 @@
 # Want to train with wordnet hierarchy? Just set `--hierarchy=wordnet` below.
 # This script is for networks that do NOT come with a pretrained checkpoint provided either by a model zoo or by the NBDT utility itself.
 
-model="ResNet18"
-dataset=CIFAR10
+model="ResNet50"
+dataset=Office_Home
 weight=1
 
 # 0. train the baseline neural network
