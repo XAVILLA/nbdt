@@ -89,6 +89,7 @@ def load_state_dict_from_key(
     device="cpu",
 ):
     valid_keys = [key for key in keys if key in model_urls]
+    print(model_urls)
     if not valid_keys:
         raise UserWarning(f"None of the keys {keys} correspond to a pretrained model.")
     key = valid_keys[-1]
