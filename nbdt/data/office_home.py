@@ -82,7 +82,7 @@ class Office_Home(data.Dataset):
     def transform_train():
         return transforms.Compose(
             [
-                transforms.RandomResizedCrop(128),
+                transforms.RandomResizedCrop(128, scale=(0.3, 1.0)),
                 transforms.RandomHorizontalFlip(),
                 transforms.ToTensor(),
                 transforms.Normalize(
