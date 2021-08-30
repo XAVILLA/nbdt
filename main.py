@@ -139,7 +139,7 @@ def main():
         trainset, batch_size=args.batch_size, shuffle=True, num_workers=2
     )
     testloader = torch.utils.data.DataLoader(
-        testset, batch_size=100, shuffle=False, num_workers=2
+        testset, batch_size=args.batch_size, shuffle=False, num_workers=2
     )
 
     Colors.cyan(f"Training with dataset {args.dataset} and {len(trainset.classes)} classes")
