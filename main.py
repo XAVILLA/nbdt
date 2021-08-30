@@ -24,7 +24,7 @@ from nbdt.tree import Tree
 
 def main():
     maybe_install_wordnet()
-    datasets = data.cifar.names + data.imagenet.names + data.custom.names + data.office_home.names + ('Fashion-MNIST',)
+    datasets = data.cifar.names + data.imagenet.names + data.custom.names + data.office_home.names + ('FashionMNIST',)
     parser = argparse.ArgumentParser(description="PyTorch CIFAR Training")
     parser.add_argument(
         "--batch-size", default=512, type=int, help="Batch size used for training"
