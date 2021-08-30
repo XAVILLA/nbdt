@@ -29,9 +29,12 @@ splits = ['Art', 'Clipart', 'Product', 'Real']
 class Office_Home(data.Dataset):
 
     def __init__(self, split='Art', train=True, transform=None, root = None, download = None):
+        local = False
+
         assert split in splits
         data_root = '/rscratch/xyyue/data/officehome/'
-        # data_root = '/Users/zixianzang/Downloads/OfficeHomeDataset_10072016/'
+        if local:
+            data_root = '/Users/zixianzang/Downloads/OfficeHomeDataset_10072016/'
         norm_file = split + '-info.json'
         if train:
             imfo_file = split + '_train.txt'
@@ -50,24 +53,27 @@ class Office_Home(data.Dataset):
         with open(img_infos, 'r') as f:
             self.imgs = f.read().splitlines()
         # print(self.imgs)
-        def is_valid(path):
-            # print(path)
-            result = [path in im.replace('zangwei/datasets', 'data') for im in self.imgs]
-            return any(result)
-
-        self.dataset = datasets.ImageFolder('/rscratch/xyyue/data/officehome/' + split,
-                                            transform=transform,
-                                            is_valid_file=is_valid)
 
 
-        # def is_valid(path):
-        #     # print(path)
-        #     result = [path in im.replace('/rscratch/xyyue/zangwei/datasets/officehome/', '/Users/zixianzang/Downloads/OfficeHomeDataset_10072016/') for im in self.imgs]
-        #     return any(result)
-        #
-        # self.dataset = datasets.ImageFolder('/Users/zixianzang/Downloads/OfficeHomeDataset_10072016/' + split,
-        #                                     transform=transform,
-        #                                     is_valid_file=is_valid)
+        if not local:
+            def is_valid(path):
+                # print(path)
+                result = [path in im.replace('zangwei/datasets', 'data') for im in self.imgs]
+                return any(result)
+
+            self.dataset = datasets.ImageFolder('/rscratch/xyyue/data/officehome/' + split,
+                                                transform=transform,
+                                                is_valid_file=is_valid)
+
+        else:
+            def is_valid(path):
+                # print(path)
+                result = [path in im.replace('/rscratch/xyyue/zangwei/datasets/officehome/', '/Users/zixianzang/Downloads/OfficeHomeDataset_10072016/') for im in self.imgs]
+                return any(result)
+
+            self.dataset = datasets.ImageFolder('/Users/zixianzang/Downloads/OfficeHomeDataset_10072016/' + split,
+                                                transform=transform,
+                                                is_valid_file=is_valid)
 
         self.classes = self.dataset.classes
         self.class_to_idx = {cls: i for i, cls in enumerate(self.classes)}
@@ -76,7 +82,7 @@ class Office_Home(data.Dataset):
     def transform_train():
         return transforms.Compose(
             [
-                transforms.RandomResizedCrop(200),
+                transforms.RandomResizedCrop(128),
                 transforms.RandomHorizontalFlip(),
                 transforms.ToTensor(),
                 transforms.Normalize(
@@ -89,7 +95,7 @@ class Office_Home(data.Dataset):
     def transform_val():
         return transforms.Compose(
             [
-                transforms.Scale((200)),
+                transforms.Scale((128, 128)),
                 transforms.ToTensor(),
                 transforms.Normalize(
                     [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
