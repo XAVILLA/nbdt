@@ -98,7 +98,6 @@ def main():
     dataset_train = getattr(data, args.dataset)
     dataset_test = getattr(data, args.dataset_test or args.dataset)
 
-
     transform_train = dataset_train.transform_train()
     transform_test = dataset_test.transform_val()
 
