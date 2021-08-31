@@ -159,6 +159,8 @@ def main():
     #     net = model(num_classes=len(trainset.classes))
 
     net = torchvision.models.resnet50(pretrained=True)
+    for param in net.parameters():
+        param.requires_grad = False
     net.fc = nn.Sequential(
         nn.Linear(2048, 128),
         nn.ReLU(inplace=True),
