@@ -162,9 +162,10 @@ def main():
     for param in net.parameters():
         param.requires_grad = False
     net.fc = nn.Sequential(
-        nn.Linear(2048, 128),
-        nn.ReLU(inplace=True),
-        nn.Linear(128, 65))
+        nn.Linear(2048, 65),
+        # nn.ReLU(inplace=True),
+        # nn.Linear(128, 65)
+    )
 
     net = net.to(device)
     if device == "cuda":
