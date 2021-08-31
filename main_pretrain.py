@@ -162,7 +162,7 @@ def main():
     net.fc = nn.Sequential(
         nn.Linear(2048, 128),
         nn.ReLU(inplace=True),
-        nn.Linear(128, 56))
+        nn.Linear(128, 65))
 
     net = net.to(device)
     if device == "cuda":
