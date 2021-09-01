@@ -225,14 +225,15 @@ def ResNet152(pretrained=False, progress=True, **kwargs):
 
 
 def ResNet50_pytorch(pretrained=False, progress=True, **kwargs):
+    print(kwargs)
     net = torchvision.models.resnet50(pretrained=True, progress=True, **kwargs)
-    # for param in net.parameters():
-    #     param.requires_grad = False
-    # net.fc = nn.Sequential(
-    #     nn.Linear(2048, 65),
-    #     # nn.ReLU(inplace=True),
-    #     # nn.Linear(128, 65)
-    # )
+    for param in net.parameters():
+        param.requires_grad = False
+    net.fc = nn.Sequential(
+        nn.Linear(2048, 65),
+        # nn.ReLU(inplace=True),
+        # nn.Linear(128, 65)
+    )
     return net
 
 
