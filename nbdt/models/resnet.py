@@ -13,7 +13,7 @@ from nbdt.models.utils import get_pretrained_model
 import torchvision
 
 
-__all__ = ("ResNet10", "ResNet18", "ResNet34", "ResNet50", "ResNet101", "ResNet152", "ResNet50_pytorch")
+__all__ = ("ResNet10", "ResNet18", "ResNet34", "ResNet50", "ResNet101", "ResNet152", "ResNet50_pytorch", "ResNet18_pytorch")
 
 
 model_urls = {
