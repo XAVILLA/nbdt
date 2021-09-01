@@ -10,6 +10,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from nbdt.models.utils import get_pretrained_model
+import torchvision
 
 
 __all__ = ("ResNet10", "ResNet18", "ResNet34", "ResNet50", "ResNet101", "ResNet152", "ResNet50_pytorch")
