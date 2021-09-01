@@ -504,7 +504,7 @@ def get_centers_from_model(model, num_classes, dataset):
 
 def get_centers_from_state_dict(state_dict):
     fc = None
-    print(state_dict)
+    print(type(state_dict))
     for key in MODEL_FC_KEYS:
         if key in state_dict:
             fc = state_dict[key].squeeze()
