@@ -12,7 +12,7 @@ import torch.nn.functional as F
 from nbdt.models.utils import get_pretrained_model
 
 
-__all__ = ("ResNet10", "ResNet18", "ResNet34", "ResNet50", "ResNet101", "ResNet152")
+__all__ = ("ResNet10", "ResNet18", "ResNet34", "ResNet50", "ResNet101", "ResNet152", "ResNet50_pytorch")
 
 
 model_urls = {
@@ -220,6 +220,17 @@ def ResNet152(pretrained=False, progress=True, **kwargs):
         pretrained=pretrained,
         progress=progress,
         **kwargs
+    )
+
+
+def ResNet50_pytorch(pretrained=False, progress=True, **kwargs):
+    net = torchvision.models.resnet50(pretrained=True)
+    for param in net.parameters():
+        param.requires_grad = False
+    net.fc = nn.Sequential(
+        nn.Linear(2048, 65),
+        # nn.ReLU(inplace=True),
+        # nn.Linear(128, 65)
     )
 
 
