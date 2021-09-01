@@ -29,6 +29,7 @@ def main():
     parser.add_argument(
         "--batch-size", default=512, type=int, help="Batch size used for training"
     )
+
     parser.add_argument(
         "--epochs",
         "-e",
@@ -56,6 +57,10 @@ def main():
         "--pretrained",
         action="store_true",
         help="Download pretrained model. Not all models support this.",
+    )
+    parser.add_argument(
+        "--notree",
+        action="store_true",
     )
     parser.add_argument("--eval", help="eval only", action="store_true")
     parser.add_argument(
@@ -190,7 +195,8 @@ def main():
                 Colors.cyan(f"==> Checkpoint found at {resume_path}")
 
     # hierarchy
-    # tree = Tree.create_from_args(args, classes=trainset.classes)
+    if not args.notree:
+        tree = Tree.create_from_args(args, classes=trainset.classes)
 
     # loss
     criterion = None
