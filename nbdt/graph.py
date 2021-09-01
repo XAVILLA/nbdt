@@ -392,6 +392,7 @@ MODEL_FC_KEYS = (
     "module.output.weight",
     "output.fc.weight",
     'module.fc.0.weight',
+    'module.fc.weight',
     "module.output.fc.weight",
     "classifier.weight",
     "model.last_layer.3.weight",
