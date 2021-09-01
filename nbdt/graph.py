@@ -391,7 +391,7 @@ MODEL_FC_KEYS = (
     "output.weight",
     "module.output.weight",
     "output.fc.weight",
-    "module.fc.0.weight",
+    'module.fc.0.weight',
     "module.output.fc.weight",
     "classifier.weight",
     "model.last_layer.3.weight",
@@ -508,6 +508,7 @@ def get_centers_from_state_dict(state_dict):
     print(state_dict.keys())
     for key in MODEL_FC_KEYS:
         if key in state_dict:
+            print("found")
             fc = state_dict[key].squeeze()
             break
     if fc is not None:
