@@ -475,6 +475,7 @@ def get_centers_from_checkpoint(checkpoint):
             state_dict = data
 
     fc = get_centers_from_state_dict(state_dict)
+    print('fc', fc)
     assert (
         fc is not None
     ), f"Could not find FC weights in checkpoint {checkpoint} with keys: {net.keys()}"
