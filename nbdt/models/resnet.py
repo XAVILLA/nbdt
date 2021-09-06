@@ -14,7 +14,7 @@ import torchvision
 
 
 __all__ = ("ResNet10", "ResNet18", "ResNet34", "ResNet50", "ResNet101", "ResNet152", "ResNet50_pytorch",
-           "ResNet18_pytorch")
+           "ResNet18_pytorch", "ResNet10_pytorch")
 
 
 model_urls = {
@@ -234,6 +234,13 @@ def ResNet50_pytorch(pretrained=False, progress=True, **kwargs):
 
 def ResNet18_pytorch(pretrained=False, progress=True, **kwargs):
     net = torchvision.models.resnet18(pretrained=True, progress=True)
+    # for param in net.parameters():
+    #     param.requires_grad = False
+    net.fc = nn.Linear(512, 65)
+    return net
+
+def ResNet10_pytorch(pretrained=False, progress=True, **kwargs):
+    net = torchvision.models.resnet10(pretrained=True, progress=True)
     # for param in net.parameters():
     #     param.requires_grad = False
     net.fc = nn.Linear(512, 65)
