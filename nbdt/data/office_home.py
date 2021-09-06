@@ -133,17 +133,17 @@ class Office_Home(data.Dataset):
 
 
 class Office_Home_Art(Office_Home):
-    def __init__(self):
-        super().__init__(split='Art', train=True, transform=None, root = None, download = None)
+    def __init__(self, root, train, download, transform):
+        super().__init__(split='Art', train=train, transform=transform, root = root, download = download)
 
 class Office_Home_Clipart(Office_Home):
-    def __init__(self):
-        super().__init__(split='Clipart', train=True, transform=None, root = None, download = None)
+    def __init__(self, root, train, download, transform):
+        super().__init__(split='Clipart', train=train, transform=transform, root = root, download = download)
 
 class Office_Home_Product(Office_Home):
-    def __init__(self):
-        super().__init__(split='Product', train=True, transform=None, root = None, download = None)
+    def __init__(self, root, train, download, transform):
+        super().__init__(split='Product', train=train, transform=transform, root = root, download = download)
 
 class Office_Home_Real(Office_Home):
-    def __init__(self):
-        super().__init__(split='Real', train=True, transform=None, root = None, download = None)
+    def __init__(self, root, train, download, transform):
+        super().__init__(split='Real', train=train, transform=transform, root = root, download = download)
