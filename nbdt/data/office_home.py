@@ -21,9 +21,12 @@ import torch
 from torch.nn import functional as F
 from torch.utils import data
 
-__all__ = names = ('Office_Home',)
+__all__ = names = ('Office_Home_Art', 'Office_Home_Clipart', 'Office_Home_Product', 'Office_Home_Real', )
 
 splits = ['Art', 'Clipart', 'Product', 'Real']
+
+mean = [0.485, 0.456, 0.406]
+std = [0.229, 0.224, 0.225]
 
 
 class Office_Home(data.Dataset):
@@ -35,19 +38,11 @@ class Office_Home(data.Dataset):
         data_root = '/rscratch/xyyue/data/officehome/'
         if local:
             data_root = '/Users/zixianzang/Downloads/OfficeHomeDataset_10072016/'
-        norm_file = split + '-info.json'
         if train:
             imfo_file = split + '_train.txt'
         else:
             imfo_file = split + '_val.txt'
         img_infos = os.path.join(data_root, 'meta', imfo_file)
-
-        normalize_info = os.path.join(data_root, norm_file)
-
-        with open(normalize_info, 'r') as f:
-            norm = json.load(f)
-            self.mean = norm['mean']
-            self.std = norm['std']
 
         self.imgs = []
         with open(img_infos, 'r') as f:
@@ -80,35 +75,53 @@ class Office_Home(data.Dataset):
 
     @staticmethod
     def transform_train():
+        # return transforms.Compose(
+        #     [
+        #         transforms.RandomResizedCrop(128,
+        #                                      # scale=(0.3, 1.0)
+        #                                      ),
+        #         transforms.RandomHorizontalFlip(),
+        #         transforms.ToTensor(),
+        #         transforms.Normalize(
+        #             [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
+        #         ),
+        #     ]
+        # )
+
         return transforms.Compose(
             [
-                transforms.RandomResizedCrop(128,
-                                             # scale=(0.3, 1.0)
-                                             ),
+                transforms.Resize((256, 256)),
                 transforms.RandomHorizontalFlip(),
+                transforms.RandomCrop(224),
                 transforms.ToTensor(),
-                transforms.Normalize(
-                    [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
-                ),
+                transforms.Normalize(mean=mean, std=std),
             ]
         )
 
     @staticmethod
     def transform_val():
+        # return transforms.Compose(
+        #     [
+        #         transforms.Scale((128, 128)),
+        #         transforms.ToTensor(),
+        #         transforms.Normalize(
+        #             [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
+        #         ),
+        #     ]
+        # )
         return transforms.Compose(
             [
-                transforms.Scale((128, 128)),
+                transforms.Resize((256, 256)),
+                transforms.CenterCrop(224),
                 transforms.ToTensor(),
-                transforms.Normalize(
-                    [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
-                ),
+                transforms.Normalize(mean=mean, std=std),
             ]
         )
 
     @staticmethod
     def transform_val_inverse():
         return transforms_custom.InverseNormalize(
-            [0.5072319249078396, 0.4708995484264786, 0.43519951206887564], [0.3277489440473064, 0.32484368518264295, 0.32752388590993836]
+            mean, std
         )
 
     def __len__(self):
@@ -116,3 +129,21 @@ class Office_Home(data.Dataset):
 
     def __getitem__(self, idx):
         return self.dataset[idx]
+
+
+
+class Office_Home_Art(Office_Home):
+    def __init__(self):
+        super().__init__(split='Art', train=True, transform=None, root = None, download = None)
+
+class Office_Home_Clipart(Office_Home):
+    def __init__(self):
+        super().__init__(split='Clipart', train=True, transform=None, root = None, download = None)
+
+class Office_Home_Product(Office_Home):
+    def __init__(self):
+        super().__init__(split='Product', train=True, transform=None, root = None, download = None)
+
+class Office_Home_Real(Office_Home):
+    def __init__(self):
+        super().__init__(split='Real', train=True, transform=None, root = None, download = None)
