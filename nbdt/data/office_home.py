@@ -31,7 +31,7 @@ std = [0.229, 0.224, 0.225]
 
 class Office_Home(data.Dataset):
 
-    def __init__(self, split='Art', train=True, transform=None, root = None, download = None):
+    def __init__(self, split='Art', train=True, root = None, download = None, **kwargs):
         local = False
 
         assert split in splits
@@ -57,8 +57,8 @@ class Office_Home(data.Dataset):
                 return any(result)
 
             self.dataset = datasets.ImageFolder('/rscratch/xyyue/data/officehome/' + split,
-                                                transform=transform,
-                                                is_valid_file=is_valid)
+                                                is_valid_file=is_valid,
+                                                **kwargs)
 
         else:
             def is_valid(path):
@@ -67,8 +67,8 @@ class Office_Home(data.Dataset):
                 return any(result)
 
             self.dataset = datasets.ImageFolder('/Users/zixianzang/Downloads/OfficeHomeDataset_10072016/' + split,
-                                                transform=transform,
-                                                is_valid_file=is_valid)
+                                                is_valid_file=is_valid,
+                                                **kwargs)
 
         self.classes = self.dataset.classes
         self.class_to_idx = {cls: i for i, cls in enumerate(self.classes)}
@@ -133,17 +133,17 @@ class Office_Home(data.Dataset):
 
 
 class Office_Home_Art(Office_Home):
-    def __init__(self, root, train, download, transform):
-        super().__init__(split='Art', train=train, transform=transform, root = root, download = download)
+    def __init__(self, root=None, train = True, download = True, **kwargs):
+        super().__init__(split='Art', train=train, root = root, download = download, **kwargs)
 
 class Office_Home_Clipart(Office_Home):
-    def __init__(self, root, train, download, transform):
-        super().__init__(split='Clipart', train=train, transform=transform, root = root, download = download)
+    def __init__(self, root=None, train = True, download = True, **kwargs):
+        super().__init__(split='Clipart', train=train, root = root, download = download, **kwargs)
 
 class Office_Home_Product(Office_Home):
-    def __init__(self, root, train, download, transform):
-        super().__init__(split='Product', train=train, transform=transform, root = root, download = download)
+    def __init__(self, root=None, train = True, download = True, **kwargs):
+        super().__init__(split='Product', train=train, root = root, download = download, **kwargs)
 
 class Office_Home_Real(Office_Home):
-    def __init__(self, root, train, download, transform):
-        super().__init__(split='Real', train=train, transform=transform, root = root, download = download)
+    def __init__(self, root=None, train = True, download = True, **kwargs):
+        super().__init__(split='Real', train=train, root = root, download = download, **kwargs)
