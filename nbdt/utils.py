@@ -27,7 +27,10 @@ DATASETS = (
     "PascalContext",
     "LookIntoPerson",
     "ADE20K",
-    "Office_Home"
+    "Office_Home_Art",
+    "Office_Home_Clipart",
+    "Office_Home_Product",
+    "Office_Home_Real",
 )
 DATASET_TO_NUM_CLASSES = {
     "CIFAR10": 10,
