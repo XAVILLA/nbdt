@@ -2,6 +2,7 @@ from .resnet import *
 from .wideresnet import *
 from pytorchcv.models.efficientnet import *
 from torchvision.models import *
+from .resnet_pytorch import *
 
 
 def get_model_choices():
