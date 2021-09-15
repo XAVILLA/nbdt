@@ -14,7 +14,7 @@ import torchvision
 
 
 __all__ = ("ResNet10", "ResNet18", "ResNet34", "ResNet50", "ResNet101", "ResNet152", "ResNet50_pytorch",
-           "ResNet18_pytorch", "ResNet10_pytorch")
+           "ResNet18_pytorch", "ResNet10_pytorch", "ResNet18_load")
 
 
 model_urls = {
