@@ -273,6 +273,7 @@ def resnet18(pretrained: bool = False, progress: bool = True, dataset=None, **kw
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
+    kwargs['num_classes'] = 1000
     net = _resnet('resnet18', BasicBlock, [2, 2, 2, 2], pretrained, progress,
                    **kwargs)
     net.fc = nn.Linear(512, 65)
