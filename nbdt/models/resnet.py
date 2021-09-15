@@ -38,6 +38,13 @@ model_urls = {
         "ResNet18",
         "TinyImagenet200",
     ): "https://github.com/alvinwan/neural-backed-decision-trees/releases/download/0.0.1/ckpt-TinyImagenet200-ResNet18.pth",
+
+    (
+        "ResNet18_load",
+        "Office_Home_Art",
+    ): 'https://download.pytorch.org/models/resnet18-f37072fd.pth',
+
+
 }
 
 
@@ -171,6 +178,17 @@ def ResNet10(pretrained=False, progress=True, **kwargs):
 
 
 def ResNet18(pretrained=False, progress=True, **kwargs):
+    return _ResNet(
+        "ResNet18",
+        BasicBlock,
+        [2, 2, 2, 2],
+        pretrained=pretrained,
+        progress=progress,
+        **kwargs
+    )
+
+
+def ResNet18_load(pretrained=False, progress=True, **kwargs):
     return _ResNet(
         "ResNet18",
         BasicBlock,
