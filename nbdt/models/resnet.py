@@ -190,7 +190,7 @@ def ResNet18(pretrained=False, progress=True, **kwargs):
 
 def ResNet18_load(pretrained=False, progress=True, **kwargs):
     return _ResNet(
-        "ResNet18",
+        "ResNet18_load",
         BasicBlock,
         [2, 2, 2, 2],
         pretrained=pretrained,
