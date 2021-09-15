@@ -259,7 +259,7 @@ def _resnet(
     if pretrained:
         # state_dict = load_state_dict_from_url(model_urls[arch],
         #                                       progress=progress)
-        state_dict = torch.load('/rscratch/xyyue/zzx/NBDT/nbdt/pytorch_models/resnet18-f37072fd.pth')
+        state_dict = torch.load('/rscratch/xyyue/zzx/NBDT/nbdt/torch_models/resnet18-f37072fd.pth')
         model.load_state_dict(state_dict)
     return model
 
