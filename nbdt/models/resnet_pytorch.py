@@ -20,6 +20,10 @@ model_urls = {
     'wide_resnet101_2': 'https://download.pytorch.org/models/wide_resnet101_2-32ee1156.pth',
 }
 
+model_paths = {
+    'resnet18': '/rscratch/xyyue/zzx/NBDT/nbdt/torch_models/resnet18-f37072fd.pth'
+}
+
 
 def conv3x3(in_planes: int, out_planes: int, stride: int = 1, groups: int = 1, dilation: int = 1) -> nn.Conv2d:
     """3x3 convolution with padding"""
@@ -259,7 +263,7 @@ def _resnet(
     if pretrained:
         # state_dict = load_state_dict_from_url(model_urls[arch],
         #                                       progress=progress)
-        state_dict = torch.load('/rscratch/xyyue/zzx/NBDT/nbdt/torch_models/resnet18-f37072fd.pth')
+        state_dict = torch.load(model_paths[arch])
         model.load_state_dict(state_dict)
     return model
 
